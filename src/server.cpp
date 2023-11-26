@@ -144,6 +144,42 @@ void server::generarCopiaSeguridad(array <correo, 1000> &correos){
     Doc.close();
 }
 
+void server::exportarCorreos(array <correo, 1000> &correos){
+    time_t now = time(0);
+    string fecha;
+    string hora;
+    string fechaExportacion;
+    tm *ltm = localtime(&now);
+    fecha = to_string(ltm->tm_mday) + "-" + to_string((ltm->tm_mon)+1) + "-" + to_string(1900 + ltm->tm_year);
+    hora = to_string(ltm->tm_hour) + ":" + to_string(ltm->tm_min);
+    fechaExportacion = fecha + ".txt";
+   //Guardar en Documento txt los correos
+    ofstream Doc;
+    Doc.open(fechaExportacion);
+    if(!Doc.is_open()){
+        Doc.open(fechaExportacion,ios::out);
+        if(!Doc.good()){
+            cout << "Error al crear el archivo..." <<endl;
+            return;
+        }
+    }
+
+    //for(int i=0;i<ultimoCorreo; i++ ){
+    for(int i=0;i<ultimoCorreo; i++ ){
+        Doc << correos[i].getId() << "," ;
+        //Doc << correos[i].getFecha_envio() << "," ;
+        Doc << "2023-10-28" << "," ;
+        Doc << correos[i].getHora_envio() << "," ;
+        Doc << correos[i].getRemitente() << "," ;
+        Doc << correos[i].getDestinatario() << "," ;
+        Doc << correos[i].getCopia_carbon() << "," ;
+        Doc << correos[i].getCopia_carbon_ciega()<< "," ;
+        Doc << correos[i].getAsunto() << ",";
+        Doc << correos[i].getContenido() << endl;
+    }
+    Doc.close();
+}
+
 int server::getCantidadCorreos(){
     ifstream archivoplano("archivo.txt");
     string texto;

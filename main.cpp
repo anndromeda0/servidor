@@ -2,25 +2,24 @@
 #include "correo.h"
 #include "server.h"
 #include <array>
-
+#define size 1000
 
 using namespace std;
 
 int main()
 {
     server servidorCorreo;
-    int tamanio = servidorCorreo.getTamanio();
-    int x = 1000;
-    array<correo,x> correos = servidorCorreo.getCorreo("archivo.txt"); //Arreglo de correos
-    array<int,tamanio> busquedaRemitente; //Arreglo de correos buscados x remitente
-    array<int,tamanio> busquedaId; //Arreglo de correos buscados x remitente
-    array<int,tamanio> busquedaIds; //Arreglo de correos buscados x remitente
+    //int tamanio = servidorCorreo.getTamanio();
+    array<correo,size> correos = servidorCorreo.getCorreo("archivo.txt"); //Arreglo de correos
+    array<int,size> busquedaRemitente; //Arreglo de correos buscados x remitente
+    array<int,size> busquedaId; //Arreglo de correos buscados x remitente
+    array<int,size> busquedaIds; //Arreglo de correos buscados x remitente
 
     //int registros = servidorCorreo.getCantidadCorreos();
     int menu = 0;
     cout << "cantidad de registros : " << servidorCorreo.getUltimoCorreo() << endl;
 
-        do{
+    do{
         cout << endl <<"Bienvenido a tu correo electronico!!" <<endl;
         cout << "Selecciona una opcion: "<< endl;
         cout << "1) Ver todos los correos." << endl;
@@ -35,7 +34,7 @@ int main()
         cout << "10) Exportar correos electronicos." << endl;
         cout << "11) Importar correos desde archivo csv." << endl;
         cout << "12) Eliminar correo de copia de seguridad." << endl;
-        cout << "10) Salir" << endl;
+        cout << "20) Salir" << endl;
         cin >> menu;
         //system("cls");
         switch(menu){
@@ -59,29 +58,6 @@ int main()
                     cout <<"--------------------------------------------------" << endl;
                 }
                 }
-                ///////Prueba
-                case 16:{ //Ver Correos
-                    correos = servidorCorreo.getCorreo("archivo.txt");
-                    system("cls");
-                    cout <<endl<<"Bandeja de entrada:"<<endl <<endl;
-                    cout <<"--------------------------------------------------" << endl;
-                for(int i= 0 ; i<servidorCorreo.getUltimoCorreo(); i++){
-                    cout << "Correo: " <<i <<endl;
-                    cout << "ID: "<<correos[i].getId()<< endl;
-                    cout << "Fecha de envio: "<<correos[i].getFecha_envio()<< endl;
-                    cout << "Hora de envio: "<<correos[i].getHora_envio()<< endl;
-                    cout << "Remitente: "<<correos[i].getRemitente()<< endl;
-                    cout << "Destinatario: "<<correos[i].getDestinatario()<< endl;
-                    cout << "CC: "<<correos[i].getCopia_carbon()<< endl;
-                    cout << "BCC: "<<correos[i].getCopia_carbon_ciega()<< endl;
-                    cout << "Asunto: "<<correos[i].getAsunto()<< endl;
-                    cout << "Contenido: "<<correos[i].getContenido()<< endl<<endl;
-                    cout <<"--------------------------------------------------" << endl;
-                }
-                }
-
-                ////
-
                 break;
                 case 2:{ //Buscar x Remitente
                     system("cls");
@@ -234,8 +210,16 @@ int main()
                     cout << "Copia de seguridad generada"  << endl;
                 }
                 break;
-                case 12:
-                    {
+                case 10:{ //Exportar Correos
+                    system("cls");
+                    servidorCorreo.exportarCorreos(correos);
+                    cout << "Los correos se han exportado en formato csv." << endl;
+                }
+                break;
+                case 11:{ //Importar Correos csv
+                }
+                break;
+                case 12:{ //Eliminar Correo de copia de seguridad
                         system("cls");
                         string id;
                         bool verificacionEliminacion;
@@ -249,8 +233,9 @@ int main()
                         cout << "Correo eliminado de copia de seguridad" << endl;
                     }
                 break;
-                case 10:{//Salida del programa
-                    cout << "Adios!" << endl;
+                case 20:{ //Salir
+                    cout << "Adios que tengas buen dia!" << endl;
+                    return 0;
                 }
                 break;
                 default:
@@ -258,7 +243,7 @@ int main()
                 break;
         }
 
-    }while(menu !=10);
+    }while(menu !=20);
 
 
 }

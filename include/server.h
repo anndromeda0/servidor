@@ -22,6 +22,7 @@ class server
         bool eliminarCorreoId(string id, array<correo,1000> &correos);
         bool eliminarCorreoRemitente(string remitente, array<correo,1000> &correos);
         void generarCopiaSeguridad(array<correo,1000> &correos);
+        void exportarCorreos(array<correo,1000> &correos);
         bool eliminarCorreoIdCopiaSeguridad(string id, array<correo,1000> &correos);
 
 
