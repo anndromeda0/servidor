@@ -2,15 +2,16 @@
 #include "correo.h"
 #include "server.h"
 #include <array>
-#define size 1000
+#define size 500
 
 using namespace std;
+array<correo,size> correos;
 
 int main()
 {
     server servidorCorreo;
     //int tamanio = servidorCorreo.getTamanio();
-    array<correo,size> correos = servidorCorreo.getCorreo("archivo.txt"); //Arreglo de correos
+    correos = servidorCorreo.getCorreo("archivo.txt"); //Arreglo de correos
     array<int,size> busquedaRemitente; //Arreglo de correos buscados x remitente
     array<int,size> busquedaId; //Arreglo de correos buscados x remitente
     array<int,size> busquedaIds; //Arreglo de correos buscados x remitente
@@ -225,10 +226,15 @@ int main()
                         bool verificacionEliminacion;
                         cout << "Ingrese el ID del correo que quiere eliminar de la copia de seguridad." << endl;
                         cin >> id;
-                        //correos = servidorCorreo.getCorreo("CopiaSeguridad.txt");
+                        correos = servidorCorreo.getCorreo("CopiaSeguridad.txt");
                         system("cls");
-                        //verificacionEliminacion = servidorCorreo.eliminarCorreoId(id,correos);
-
+                        verificacionEliminacion = servidorCorreo.eliminarCorreoId(id,correos);
+                        if(verificacionEliminacion){
+                            servidorCorreo.generarCopiaSeguridad(correos);
+                            cout << "Correos Eliminado!" << endl;
+                        }else{
+                            cout << "No hubo correo que eliminar!";
+                        }
 
                         cout << "Correo eliminado de copia de seguridad" << endl;
                     }

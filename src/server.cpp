@@ -6,6 +6,7 @@
 #include "correo.h"
 #include <cstdlib>
 #include <ctime>
+#define size 500
 
 using namespace std;
 
@@ -20,10 +21,10 @@ server::~server()
     //dtor
 }
 
-array<correo,1000> server::getCorreo(string path){
+array<correo,size> server::getCorreo(string path){
 string texto;
 ifstream archivoplano(path);
-array<correo,1000> correos;
+array<correo,size> correos;
 int contadorRegistros = 0;
 
 while(getline(archivoplano, texto)){
@@ -80,7 +81,7 @@ return correos;
 
 
 
-void server::guardarCorreo(array<correo,1000> &correos){
+void server::guardarCorreo(array<correo,size> &correos){
     //Fecha
     time_t now = time(0);
     string fecha;
@@ -116,7 +117,7 @@ void server::guardarCorreo(array<correo,1000> &correos){
     Doc.close();
 }
 
-void server::generarCopiaSeguridad(array <correo, 1000> &correos){
+void server::generarCopiaSeguridad(array <correo, size> &correos){
    //Guardar en Documento txt los correos
     ofstream Doc;
     Doc.open("CopiaSeguridad.txt");
@@ -144,7 +145,7 @@ void server::generarCopiaSeguridad(array <correo, 1000> &correos){
     Doc.close();
 }
 
-void server::exportarCorreos(array <correo, 1000> &correos){
+void server::exportarCorreos(array <correo, size> &correos){
     time_t now = time(0);
     string fecha;
     string hora;
@@ -202,13 +203,13 @@ archivoplano.close();
 return contadorRegistros;
 }
 
-array<int,1000> server::buscarCorreoRemitente(string remitente, array<correo,1000> correos){
-    array<int,1000> indiceCorreos;
-    for(int j=0;j<1000;j++){
+array<int,size> server::buscarCorreoRemitente(string remitente, array<correo,size> correos){
+    array<int,size> indiceCorreos;
+    for(int j=0;j<size;j++){
         indiceCorreos[j] = -1;
     }
     int indice = 0;
-    for(int i=0; i<1000;i++){
+    for(int i=0; i<size;i++){
         if(correos[i].getRemitente() == remitente){
             indiceCorreos[indice] = i;
             indice++;
@@ -217,13 +218,13 @@ array<int,1000> server::buscarCorreoRemitente(string remitente, array<correo,100
     return indiceCorreos;
 }
 
-array<int,1000> server::buscarCorreoId(string id, array<correo,1000> correos){
-    array<int,1000> indiceCorreos;
-    for(int j=0;j<1000;j++){
+array<int,size> server::buscarCorreoId(string id, array<correo,size> correos){
+    array<int,size> indiceCorreos;
+    for(int j=0;j<size;j++){
         indiceCorreos[j] = -1;
     }
     int indice = 0;
-    for(int i=0; i<1000;i++){
+    for(int i=0; i<size;i++){
         if(correos[i].getId() == id){
             indiceCorreos[indice] = i;
             indice++;
@@ -295,9 +296,9 @@ void server::setUltimoCorreo(int ultimoCorreo){
     this->ultimoCorreo = ultimoCorreo;
 }
 
-bool server::eliminarCorreoId(string id, array<correo, 1000> &correos){
+bool server::eliminarCorreoId(string id, array<correo, size> &correos){
     int indiceCorreoBuscado = -1;
-    for(int i=0;i<1000;i++){
+    for(int i=0;i<size;i++){
         if(correos[i].getId() == id){
             indiceCorreoBuscado = i;
         }
@@ -312,9 +313,9 @@ bool server::eliminarCorreoId(string id, array<correo, 1000> &correos){
    return true;
 }
 
-bool server::eliminarCorreoIdCopiaSeguridad(string id, array<correo, 1000> &correos){
+bool server::eliminarCorreoIdCopiaSeguridad(string id, array<correo, size> &correos){
     int indiceCorreoBuscado = -1;
-    for(int i=0;i<1000;i++){
+    for(int i=0;i<size;i++){
         if(correos[i].getId() == id){
             indiceCorreoBuscado = i;
         }
@@ -329,9 +330,9 @@ bool server::eliminarCorreoIdCopiaSeguridad(string id, array<correo, 1000> &corr
    return true;
 }
 
-bool server::eliminarCorreoRemitente(string remitente, array<correo, 1000> &correos){
+bool server::eliminarCorreoRemitente(string remitente, array<correo, size> &correos){
     int indiceCorreoBuscado = -1;
-    for(int i=0;i<1000;i++){
+    for(int i=0;i<size;i++){
         if(correos[i].getRemitente() == remitente){
             indiceCorreoBuscado = i;
         }
