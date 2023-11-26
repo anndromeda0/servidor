@@ -1,0 +1,109 @@
+# depslib dependency file v1.0
+1696478738 source:c:\users\fsociety\documents\c++\servidor\main.cpp
+	<iostream>
+	"correo.h"
+	"server.h"
+	<array>
+
+1696438697 c:\users\fsociety\documents\c++\servidor\include\correo.h
+	<string>
+
+1696438678 source:c:\users\fsociety\documents\c++\servidor\src\correo.cpp
+	"correo.h"
+
+1696479219 source:c:\users\fsociety\documents\c++\servidor\src\server.cpp
+	"server.h"
+	<iostream>
+	<fstream>
+	<string>
+	<string.h>
+	"correo.h"
+	<cstdlib>
+
+1696450737 c:\users\fsociety\documents\c++\servidor\include\server.h
+	"correo.h"
+	<array>
+
+1696307680 source:c:\users\fsociety\documents\c++\servidor\src\prueba.cpp
+	"prueba.h"
+
+1696307680 c:\users\fsociety\documents\c++\servidor\include\prueba.h
+
+1698627069 source:c:\users\pacog\onedrive\documentos\code\c\servidor\main.cpp
+	<iostream>
+	"correo.h"
+	"server.h"
+	<array>
+
+1698349249 c:\users\pacog\onedrive\documentos\code\c\servidor\include\correo.h
+	<string>
+
+1698510032 c:\users\pacog\onedrive\documentos\code\c\servidor\include\server.h
+	"correo.h"
+	<array>
+
+1698349249 source:c:\users\pacog\onedrive\documentos\code\c\servidor\src\correo.cpp
+	"correo.h"
+
+1698510032 source:c:\users\pacog\onedrive\documentos\code\c\servidor\src\server.cpp
+	"server.h"
+	<iostream>
+	<fstream>
+	<string>
+	<string.h>
+	"correo.h"
+	<cstdlib>
+	<ctime>
+
+1699833789 source:c:\users\pacog\onedrive\documentos\code\c\servidor\servidor\main.cpp
+	<iostream>
+	"correo.h"
+	"server.h"
+	<array>
+
+1699400280 c:\users\pacog\onedrive\documentos\code\c\servidor\servidor\include\correo.h
+	<string>
+
+1699833770 c:\users\pacog\onedrive\documentos\code\c\servidor\servidor\include\server.h
+	"correo.h"
+	<array>
+
+1699400280 source:c:\users\pacog\onedrive\documentos\code\c\servidor\servidor\src\correo.cpp
+	"correo.h"
+
+1699833770 source:c:\users\pacog\onedrive\documentos\code\c\servidor\servidor\src\server.cpp
+	"server.h"
+	<iostream>
+	<fstream>
+	<string>
+	<string.h>
+	"correo.h"
+	<cstdlib>
+	<ctime>
+
+1700871122 source:c:\users\frgarciav\documents\code\c\servidor\main.cpp
+	<iostream>
+	"correo.h"
+	"server.h"
+	<array>
+
+1699840243 c:\users\frgarciav\documents\code\c\servidor\include\correo.h
+	<string>
+
+1700871211 c:\users\frgarciav\documents\code\c\servidor\include\server.h
+	"correo.h"
+	<array>
+
+1699840243 source:c:\users\frgarciav\documents\code\c\servidor\src\correo.cpp
+	"correo.h"
+
+1700871267 source:c:\users\frgarciav\documents\code\c\servidor\src\server.cpp
+	"server.h"
+	<iostream>
+	<fstream>
+	<string>
+	<string.h>
+	"correo.h"
+	<cstdlib>
+	<ctime>
+
