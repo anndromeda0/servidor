@@ -107,7 +107,7 @@
 	<cstdlib>
 	<ctime>
 
-1701014926 source:c:\users\pacog\onedrive\documentos\code\proyecto\servidor\main.cpp
+1701023584 source:c:\users\pacog\onedrive\documentos\code\proyecto\servidor\main.cpp
 	<iostream>
 	"correo.h"
 	"server.h"
@@ -116,14 +116,14 @@
 1701013020 c:\users\pacog\onedrive\documentos\code\proyecto\servidor\include\correo.h
 	<string>
 
-1701015353 c:\users\pacog\onedrive\documentos\code\proyecto\servidor\include\server.h
+1701019921 c:\users\pacog\onedrive\documentos\code\proyecto\servidor\include\server.h
 	"correo.h"
 	<array>
 
 1701013020 source:c:\users\pacog\onedrive\documentos\code\proyecto\servidor\src\correo.cpp
 	"correo.h"
 
-1701015353 source:c:\users\pacog\onedrive\documentos\code\proyecto\servidor\src\server.cpp
+1701023809 source:c:\users\pacog\onedrive\documentos\code\proyecto\servidor\src\server.cpp
 	"server.h"
 	<iostream>
 	<fstream>

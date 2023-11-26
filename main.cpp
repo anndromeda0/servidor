@@ -35,6 +35,7 @@ int main()
         cout << "10) Exportar correos electronicos." << endl;
         cout << "11) Importar correos desde archivo csv." << endl;
         cout << "12) Eliminar correo de copia de seguridad." << endl;
+        cout << "13) Generar copia de seguridad con la informacion cifrada." << endl;
         cout << "20) Salir" << endl;
         cin >> menu;
         //system("cls");
@@ -238,6 +239,15 @@ int main()
 
                         cout << "Correo eliminado de copia de seguridad" << endl;
                     }
+                break;
+                case 13:{ //Generar copia de seguridad cifrada
+                    string password;
+                    system("cls");
+                    cout << "Introduzca una contraseña para cifrar los correos:" << endl;
+                    cin >> password;
+                    servidorCorreo.generarCopiaSeguridadCifrada(correos,password);
+                    cout << "Copia de seguridad cifrada generada"  << endl;
+                }
                 break;
                 case 20:{ //Salir
                     cout << "Adios que tengas buen dia!" << endl;

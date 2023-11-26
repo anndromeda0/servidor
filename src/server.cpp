@@ -145,6 +145,37 @@ void server::generarCopiaSeguridad(array <correo, size> &correos){
     Doc.close();
 }
 
+void server::generarCopiaSeguridadCifrada(array <correo, size> &correos, string password){
+   //Guardar en Documento txt los correos
+    ofstream Doc;
+    Doc.open("CopiaSeguridadCifrada.txt");
+    if(!Doc.is_open()){
+        Doc.open("CopiaSeguridadCifrada.txt",ios::out);
+        if(!Doc.good()){
+            cout << "Error al crear el archivo..." <<endl;
+            return;
+        }
+    }
+
+    //for(int i=0;i<ultimoCorreo; i++ ){
+    /// *******************************************
+    for(int i=0;i<ultimoCorreo; i++ ){
+        Doc << correos[i].getId() << "," ;
+        //Doc << correos[i].getFecha_envio() << "," ;
+        Doc << "2023-10-28" << "," ;
+        Doc << correos[i].getHora_envio() << "," ;
+        //Doc << correos[i].getRemitente() << "," ;
+        Doc << cifradoCesar(password,correos[i].getRemitente()) << ",";
+        Doc << cifradoCesar(password,correos[i].getDestinatario()) << "," ;
+        Doc << cifradoCesar(password,correos[i].getCopia_carbon()) << "," ;
+        Doc << cifradoCesar(password,correos[i].getCopia_carbon_ciega())<< "," ;
+        Doc << cifradoCesar(password,correos[i].getAsunto()) << ",";
+        Doc << cifradoCesar(password,correos[i].getContenido()) << endl;
+    }
+    /// *******************************************
+    Doc.close();
+}
+
 void server::exportarCorreos(array <correo, size> &correos){
     time_t now = time(0);
     string fecha;
@@ -345,4 +376,33 @@ bool server::eliminarCorreoRemitente(string remitente, array<correo, size> &corr
     ultimoCorreo--;
 
    return true;
+}
+
+string server::cifradoCesar(string password, string palabra){
+    string palabraCodificada="";
+
+    const int largoPassword = password.length();
+    char* passArray = new char(largoPassword);
+    strcpy(passArray,password.c_str());
+    int codificador = 0; //Entero que se utilizara para generar un digito 0-10 para metodo Cesar
+
+    //Obtener numero codificador
+    for(int i = 0 ; i<largoPassword; i++){
+        codificador+=int(passArray[i])%2;
+    }
+
+    const int largoPalabra = palabra.length();
+
+    //char* palabraArray = new char(largoPalabra + 1);
+    //strcpy(palabraArray,palabra.c_str());
+
+    char palabraArray[palabra.length()+1];
+    strcpy(palabraArray, palabra.c_str());
+
+    for(int j=0;j<largoPalabra;j++){
+        palabraCodificada = palabraCodificada + char(int(palabraArray[j])+codificador);
+    }
+
+
+return palabraCodificada;
 }
