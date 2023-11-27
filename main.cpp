@@ -19,14 +19,13 @@ int main()
     //int registros = servidorCorreo.getCantidadCorreos();
     int menu = 0;
     //cout << "cantidad de registros : " << servidorCorreo.getUltimoCorreo() << endl;
+    /*string password = "B";
+    string cadena = "Rubi";
+    string cadenaEncriptada = servidorCorreo.cifradoCesar(password,cadena);
+    cout << cadena << endl;
+    cout << cadenaEncriptada << endl;
+    cout << servidorCorreo.descifradoCesar(password,cadenaEncriptada) << endl;*/
 
-    string cadena = "JuanCosala";
-    string llave = "B";
-
-    string encriptado = servidorCorreo.cifradoCesar(llave,cadena);
-    cout << "Cadena: " << cadena << endl;
-    cout << "Encriptacion: " << servidorCorreo.cifradoCesar(llave,cadena) << endl;
-    cout << "Desencriptacion: " << servidorCorreo.descifradoCesar(llave,encriptado) << endl;
 
     do{
         cout << endl <<"Bienvenido a tu correo electronico!!" <<endl;
@@ -130,18 +129,21 @@ int main()
                     cin >> id;
                     busquedaId = servidorCorreo.buscarCorreoId(id,correos);
                     system("cls");
-                    servidorCorreo.capturarCorreoNuevo(correoModificado); //Capturar datos nuevos
+                    servidorCorreo.capturarCorreoNuevoModificar(correoModificado); //Capturar datos nuevos
 
-                    for(int i=0;i<100;i++){
+                    for(int i=0;i<size;i++){
                         if(busquedaId[i] != -1){
                             posicionCorreo = busquedaId[i];
                             cout << posicionCorreo <<endl;
                         }
                     }
                     if(posicionCorreo != -1){
+                        correoModificado.setId(correos[posicionCorreo].getId());
+                        correoModificado.setRemitente(correos[posicionCorreo].getRemitente());
                         correos[posicionCorreo] = correoModificado;
                     }
                     servidorCorreo.guardarCorreo(correos);
+                    servidorCorreo.guardarCorreoBinario(correos);
                     cout << "Correos: " << servidorCorreo.getUltimoCorreo();
                 }
                 break;
@@ -154,7 +156,7 @@ int main()
                     cin >> remitente;
                     busquedaRemitente = servidorCorreo.buscarCorreoRemitente(remitente,correos);
                     system("cls");
-                    servidorCorreo.capturarCorreoNuevo(correoModificado); //Capturar datos nuevos
+                    servidorCorreo.capturarCorreoNuevoModificar(correoModificado); //Capturar datos nuevos
 
                     for(int i=0;i<100;i++){
                         if(busquedaRemitente[i] != -1){
@@ -163,6 +165,8 @@ int main()
                         }
                     }
                     if(posicionCorreo != -1){
+                        correoModificado.setId(correos[posicionCorreo].getId());
+                        correoModificado.setRemitente(correos[posicionCorreo].getRemitente());
                         correos[posicionCorreo] = correoModificado;
                     }
                     servidorCorreo.guardarCorreo(correos);
@@ -228,6 +232,9 @@ int main()
                 }
                 break;
                 case 11:{ //Importar Correos csv
+                    correos = servidorCorreo.getCorreo("archivo.txt");
+                    system("cls");
+                    cout <<endl<<"Los correos fueron importados correctamente desde el archivo:"<<endl <<endl;
                 }
                 break;
                 case 12:{ //Eliminar Correo de copia de seguridad

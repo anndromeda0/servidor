@@ -117,6 +117,47 @@ void server::guardarCorreo(array<correo,size> &correos){
     Doc.close();
 }
 
+void server::guardarCorreoBinario(array<correo,size> &correos){
+    //Fecha
+    time_t now = time(0);
+    string fecha;
+    string hora;
+
+    tm *ltm = localtime(&now);
+    fecha = to_string(ltm->tm_mday) + "-" + to_string((ltm->tm_mon)+1) + "-" + to_string(1900 + ltm->tm_year);
+    hora = to_string(ltm->tm_hour) + ":" + to_string(ltm->tm_min);
+
+    //Guardar en Documento txt los correos
+    ofstream Doc;
+    Doc.open("archivo2.txt", ios::out | ios::in | ios::binary);
+    if(!Doc.is_open()){
+        Doc.open("archivo.txt2",ios::out);
+        if(!Doc.good()){
+            cout << "Error al crear el archivo..." <<endl;
+            return;
+        }
+    }
+    int identificador = 0;
+    for(int i=0;i<ultimoCorreo; i++ ){
+        Doc << correos[i].getId() << "," ;
+        //Doc << correos[i].getFecha_envio() << "," ;
+        Doc << fecha  << "," ;
+        Doc << hora << "," ;
+        Doc << correos[i].getRemitente() << "," ;
+        Doc << correos[i].getDestinatario() << "," ;
+        Doc << correos[i].getCopia_carbon() << "," ;
+        Doc << correos[i].getCopia_carbon_ciega()<< "," ;
+        Doc << correos[i].getAsunto() << ",";
+        Doc << correos[i].getContenido() << endl;
+        //identificador = stoi(correos[i].getId());
+        identificador = 10;
+        Doc.seekp((identificador-1)*sizeof(correos[i]));
+        Doc.write((char*) &correos[i],sizeof(correos[i]));
+    }
+    //Doc.seekp()
+    Doc.close();
+}
+
 void server::generarCopiaSeguridad(array <correo, size> &correos){
    //Guardar en Documento txt los correos
     ofstream Doc;
@@ -228,6 +269,7 @@ void server::exportarCorreos(array <correo, size> &correos){
     }
 
     //for(int i=0;i<ultimoCorreo; i++ ){
+    Doc << "id,Fecha_envio,Hora_envio,Remitente,Destinatario,Copia_carbon,Copia_carbon_ciega,Asunto,Contenido" << endl;
     for(int i=0;i<ultimoCorreo; i++ ){
         Doc << correos[i].getId() << "," ;
         //Doc << correos[i].getFecha_envio() << "," ;
@@ -346,6 +388,57 @@ bool server::capturarCorreoNuevo(correo &correoNuevo){
     return confirmacion;
 }
 
+bool server::capturarCorreoNuevoModificar(correo &correoNuevo){
+    //string id;
+    //string remitente;
+    string destinatario;
+    string cc;
+    string bcc;
+    string asunto;
+    string contenido;
+        //Fecha
+    time_t now = time(0);
+    string fecha;
+    string hora;
+
+    tm *ltm = localtime(&now);
+    fecha = to_string(ltm->tm_mday) + "-" + to_string((ltm->tm_mon)+1) + "-" + to_string(1900 + ltm->tm_year);
+    hora = to_string(ltm->tm_hour) + ":" + to_string(ltm->tm_min);
+
+
+    bool confirmacion = false;
+
+    //cout << "Ingrese el ID: " <<endl;
+    //cin >> id;
+    //cout << "Ingrese el remitente: " <<endl;
+    //cin >> remitente;
+    cout << "Ingrese el destinatario: " <<endl;
+    cin >> destinatario;
+    cout << "Ingrese la copia carbon: " <<endl;
+    cin >> cc;
+    cout << "Ingrese la copia carbon ciega: " <<endl;
+    cin >> bcc;
+    cout << "Ingrese el asunto: " << endl;
+    cin >> asunto;
+    cout << "Ingrese el contenido: " << endl;
+    cin >> contenido;
+
+
+    //correoNuevo.setId(id);
+    correoNuevo.setFecha_envio(fecha);
+    correoNuevo.setHora_envio(hora);
+    //correoNuevo.setRemitente(remitente);
+    correoNuevo.setDestinatario(destinatario);
+    correoNuevo.setCopia_carbon(cc);
+    correoNuevo.setCopia_carbon_ciega(bcc);
+    correoNuevo.setAsunto(asunto);
+    correoNuevo.setContenido(contenido);
+
+    confirmacion = true;
+
+    return confirmacion;
+}
+
 int server::getUltimoCorreo(){
     return ultimoCorreo;
 }
@@ -431,7 +524,7 @@ string server::cifradoCesar(string password, string palabra){
     strcpy(palabraArray, palabra.c_str());
 
     for(int j=0;j<largoPalabra;j++){
-        palabraCodificada = palabraCodificada + char(int(palabraArray[j])+ codificador );
+        palabraCodificada = palabraCodificada + char(int(palabraArray[j])+ (codificador+1) );
     }
 
     //cout << "#Codificador cifrado: " << codificador << endl;
@@ -460,7 +553,7 @@ string server::descifradoCesar(string password, string palabra){
     strcpy(palabraArray, palabra.c_str());
 
     for(int j=0;j<largoPalabra;j++){
-        palabraDecodificada = palabraDecodificada + char(int(palabraArray[j]) - codificador ); //Para descifrar solo hay que restar el decodificador
+        palabraDecodificada = palabraDecodificada + char(int(palabraArray[j]) - (codificador+1) ); //Para descifrar solo hay que restar el decodificador
     }
 
     //cout << "#Codificador descifrado: " << codificador << endl;

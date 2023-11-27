@@ -16,9 +16,11 @@ class server
         array<int,size2> buscarCorreoRemitente(string remitente, array<correo,size2> correos); //Busca x Remitente en todos los correos cargados
         array<int,size2> buscarCorreoId(string id, array<correo,size2> correos); //Busca x ID en todos los correos cargados
         bool capturarCorreoNuevo(correo &correoNuevo); //Captura de correo nuevo
+        bool capturarCorreoNuevoModificar(correo &correoNuevo); //Captura de correo nuevo
         int getUltimoCorreo(); //Obtener la posicion del ultimo correo
         int getTamanio();
         void guardarCorreo(array<correo,size2> &correos); //Almacena los correos de la estructura en el archivo.txt
+        void guardarCorreoBinario(array<correo,size2> &correos); //Almacena los correos de la estructura en el archivo.txt
         void setUltimoCorreo(int ultimoCorreo); //establece la posicion del ultimo correo
         bool eliminarCorreoId(string id, array<correo,size2> &correos); //Elimina correo x id
         bool eliminarCorreoRemitente(string remitente, array<correo,size2> &correos); //Elimina correo x remitente
