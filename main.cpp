@@ -18,7 +18,15 @@ int main()
 
     //int registros = servidorCorreo.getCantidadCorreos();
     int menu = 0;
-    cout << "cantidad de registros : " << servidorCorreo.getUltimoCorreo() << endl;
+    //cout << "cantidad de registros : " << servidorCorreo.getUltimoCorreo() << endl;
+
+    string cadena = "JuanCosala";
+    string llave = "B";
+
+    string encriptado = servidorCorreo.cifradoCesar(llave,cadena);
+    cout << "Cadena: " << cadena << endl;
+    cout << "Encriptacion: " << servidorCorreo.cifradoCesar(llave,cadena) << endl;
+    cout << "Desencriptacion: " << servidorCorreo.descifradoCesar(llave,encriptado) << endl;
 
     do{
         cout << endl <<"Bienvenido a tu correo electronico!!" <<endl;
@@ -36,6 +44,7 @@ int main()
         cout << "11) Importar correos desde archivo csv." << endl;
         cout << "12) Eliminar correo de copia de seguridad." << endl;
         cout << "13) Generar copia de seguridad con la informacion cifrada." << endl;
+        cout << "14) Descifrar copia de seguridad con la infromacion cifrada." << endl;
         cout << "20) Salir" << endl;
         cin >> menu;
         //system("cls");
@@ -247,6 +256,16 @@ int main()
                     cin >> password;
                     servidorCorreo.generarCopiaSeguridadCifrada(correos,password);
                     cout << "Copia de seguridad cifrada generada"  << endl;
+                }
+                break;
+                case 14:{ //Descifrado de copia de seguridad
+                    string password;
+                    system("cls");
+                    cout << "Introduzca la contraseña para descifrar los correos: " << endl;
+                    cin >> password;
+                    correos = servidorCorreo.getCorreo("CopiaSeguridadCifrada.txt");
+                    servidorCorreo.generarCopiaSeguridadDescifrada(correos,password);
+                    cout << "Copia de seguridad descifrada Generada" << endl;
                 }
                 break;
                 case 20:{ //Salir

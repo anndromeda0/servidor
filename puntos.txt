@@ -11,17 +11,17 @@
 6.1.1-   Eliminar por id								x
 6.1.2-  Eliminar por remitente
 7.- Copias de seguridad
-7.1 Copia de seguridad de correos electronicos						-
-7.2 copia de seguridad en archivos en csv						-
-7.3 los csv deben cumplir con el rfc 4180						-
-7.4 Exportar correos electronicos
-7.4.1 Exportar todos los correos en el archivo de datos principal
-7.4.2 Todos los campos deben ser exportados en el mismo orden del (3)
-7.4.3 Encabezado
-7.5 Importar correos electronicos previamente exportados en un archivo en csv
-7.6 Copia de seguridad
-7.6.1 Eliminar correo de copia de seguridad
-7.6.2 Modificar correo elecctronico del archivo csv
+7.1 Copia de seguridad de correos electronicos						x
+7.2 copia de seguridad en archivos en csv						x
+7.3 los csv deben cumplir con el rfc 4180						x
+7.4 Exportar correos electronicos							x
+7.4.1 Exportar todos los correos en el archivo de datos principal			x
+7.4.2 Todos los campos deben ser exportados en el mismo orden del (3)			x
+7.4.3 Encabezado									x
+7.5 Importar correos electronicos previamente exportados en un archivo en csv		
+7.6 Copia de seguridad									x	
+7.6.1 Eliminar correo de copia de seguridad						x	
+7.6.2 Modificar correo elecctronico del archivo csv					x (igual que el 5.1.1 & 5.1.2)
 7.7 Exportar correos en formato propietario
 7.7.1 Exportar correos con formato de longitud variable con campos de dimension en vez de delimitadores
 7.7.2 Eliminar y modificar exportados en formato propietario en el archivo exportado
@@ -31,6 +31,10 @@
 8.2.2 El sistema cargara en una estructura de datos RAM , el contenido de todo el archivo de datos ordenados por el remitente
 8.2.3 Busqueda x remitente como 4.1.2
 8.3 Busqueda x indice
+
+9.1 Sistema para cifrar correos almaccenados en copia de seguridad (Cesar)
+9.2 Descifrado 
+9.3 Contraseña
 
 
 8-8.1-8.2-8.2.1-8.2.2-8.2.3

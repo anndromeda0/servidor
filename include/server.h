@@ -24,9 +24,11 @@ class server
         bool eliminarCorreoRemitente(string remitente, array<correo,size2> &correos); //Elimina correo x remitente
         void generarCopiaSeguridad(array<correo,size2> &correos); //Genera copia de seguridad
         void generarCopiaSeguridadCifrada(array<correo,size2> &correos, string password);
+        void generarCopiaSeguridadDescifrada(array<correo,size2> &correos, string password);
         void exportarCorreos(array<correo,size2> &correos); //Exporta correos en fecha.txt
         bool eliminarCorreoIdCopiaSeguridad(string id, array<correo,size2> &correos); //elimina correo x id en copia de seguridad
         string cifradoCesar(string password, string palabra); //Funcion para cifrar informacion de todos los correos
+        string descifradoCesar(string password, string palabra); //Descifrado por metodo cesar mediante una clave
 
     protected:
 
